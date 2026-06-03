@@ -1,0 +1,70 @@
+﻿<UserControl
+    x:Class="ShopManagerPro.UserControls.UserControlFelhasznalok"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ShopManagerPro.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <StackPanel>
+        <DataGrid
+            x:Name="datagridFelhasznalok"
+            Width="1000"
+            Height="500"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            IsReadOnly="True"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="ID: " />
+                <DataGridTextColumn Binding="{Binding FhNev}" Header="Felhasználónév" />
+                <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
+                <DataGridTextColumn Binding="{Binding PasswordHash}" Header="Jelszó"/>
+                <DataGridTextColumn Binding="{Binding VezNev}" Header="Vezetéknév" />
+                <DataGridTextColumn Binding="{Binding KerNev}" Header="Keresztnév" />
+                <DataGridTextColumn Binding="{Binding Keszitve}" Header="Készítve" />
+                <DataGridTextColumn Binding="{Binding Aktiv}" Header="Aktív-e " />
+                <DataGridTextColumn Binding="{Binding Szerep}" Header="Szerep" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <WrapPanel Margin="130,10,130,0" VerticalAlignment="Center">
+            <StackPanel Width="300">
+                <TextBlock Text="Felhasználó név:" />
+                <TextBox x:Name="felhasznaloNevTxtBx" />
+                <TextBlock Text="Teljes név:" />
+                <TextBox x:Name="teljesNevTxtBx" />
+                <TextBlock Text="Jelszó:" />
+                <PasswordBox x:Name="jelszoBx" />
+                <TextBlock Text="Szerepkör:" />
+                <ComboBox x:Name="szerepkor" />
+            </StackPanel>
+            <StackPanel>
+                <Button
+                    x:Name="mentesBtn"
+                    Width="200"
+                    Margin="20,10,0,0"
+                    Background="DarkGreen"
+                    
+                    Content="Mentés"
+                    Foreground="White" />
+                <Button
+                    x:Name="torlesBtn"
+                    Width="200"
+                    Margin="20,10,0,0"
+                    Background="DarkRed"
+                    
+                    Content="Törlés"
+                    Foreground="White" />
+                <Button
+                    x:Name="modBth"
+                    Width="200"
+                    Margin="20,10,0,0"
+                    Background="Bisque"
+                    
+                    Content="Módosítás" />
+            </StackPanel>
+        </WrapPanel>
+
+    </StackPanel>
+</UserControl>

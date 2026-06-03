@@ -1,12 +1,56 @@
-﻿<Window x:Class="ShopManagerPro.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ShopManagerPro"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+﻿<Window     x:Class="ShopManagerPro.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ShopManagerPro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ShopManagerPro"
+    Width="1100"
+    Height="800"
+    FontSize="24"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary Source="Resources/ListViewItem.xaml" />
+    </Window.Resources>
+    <DockPanel Background="#334155">
 
-    </Grid>
+        <StackPanel Height="30" DockPanel.Dock="Top">
+            <TextBlock
+                FontWeight="ExtraBold"
+                Foreground="White"
+                Text="ShopManagerPro felület"
+                TextAlignment="Center" />
+        </StackPanel>
+        <StackPanel Width="200" DockPanel.Dock="Right">
+            <ListView>
+                <ListViewItem
+                    x:Name="vevoMenu"
+                    Content="Vevők"
+                    MouseLeftButtonUp="vevoMenu_MouseLeftButtonUp"
+                    Style="{StaticResource ResourceKey=ListItemStyle}" />
+                <ListViewItem
+                    x:Name="termekMenu"
+                    Content="Termékek"
+                    MouseLeftButtonUp="termekMenu_MouseLeftButtonUp"
+                    Style="{StaticResource ResourceKey=ListItemStyle}" />
+
+                <ListViewItem
+                    x:Name="felhasznalokMenu"
+                    Content="Felhasználók"
+                    MouseLeftButtonUp="felhasznalokMenu_MouseLeftButtonUp"
+                    Style="{StaticResource ResourceKey=ListItemStyle}" />
+                <ListViewItem
+                    x:Name="bezarasMenu"
+                    Background="Red"
+                    Content="Bezárás"
+                    Foreground="White"
+                    MouseLeftButtonUp="bezarasMenu_MouseLeftButtonUp"
+                    Style="{StaticResource ResourceKey=ListItemStyle}" />
+            </ListView>
+        </StackPanel>
+        <StackPanel x:Name="feladatPanel" DockPanel.Dock="Left" />
+    </DockPanel>
 </Window>
