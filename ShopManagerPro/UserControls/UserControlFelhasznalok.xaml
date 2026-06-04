@@ -10,7 +10,7 @@
         <DataGrid
             x:Name="datagridFelhasznalok"
             Width="1000"
-            Height="500"
+            Height="700"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserDeleteRows="False"
@@ -21,20 +21,23 @@
                 <DataGridTextColumn Binding="{Binding FhNev}" Header="Felhasználónév" />
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
                 <DataGridTextColumn Binding="{Binding PasswordHash}" Header="Jelszó"/>
-                <DataGridTextColumn Binding="{Binding VezNev}" Header="Vezetéknév" />
-                <DataGridTextColumn Binding="{Binding KerNev}" Header="Keresztnév" />
+                <DataGridTextColumn Binding="{Binding TeljesNev}" Header="Teljes név" />
                 <DataGridTextColumn Binding="{Binding Keszitve}" Header="Készítve" />
                 <DataGridTextColumn Binding="{Binding Aktiv}" Header="Aktív-e " />
                 <DataGridTextColumn Binding="{Binding Szerep}" Header="Szerep" />
             </DataGrid.Columns>
         </DataGrid>
-        <WrapPanel Margin="130,10,130,0" VerticalAlignment="Center">
+        <WrapPanel Height="230">
             <StackPanel Width="300">
                 <TextBlock Text="Felhasználó név:" />
                 <TextBox x:Name="felhasznaloNevTxtBx" />
+                <TextBlock Text="Email:" />
+                <TextBox x:Name="emailTxtBx" />
                 <TextBlock Text="Teljes név:" />
                 <TextBox x:Name="teljesNevTxtBx" />
-                <TextBlock Text="Jelszó:" />
+                <TextBlock Text="Készítve:" />
+                <TextBox x:Name="keszitveTxtBx" />
+                <TextBlock Text="Jelszó"/>
                 <PasswordBox x:Name="jelszoBx" />
                 <TextBlock Text="Szerepkör:" />
                 <ComboBox x:Name="szerepkor" />

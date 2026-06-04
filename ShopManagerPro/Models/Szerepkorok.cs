@@ -11,7 +11,7 @@ namespace ShopManagerPro.Models
         Admin, //1
         Mod, //2
         Helper, //3
-        User, //4
+        Vásárló, //4
         Vendég, //5
         
 

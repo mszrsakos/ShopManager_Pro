@@ -17,25 +17,19 @@ namespace ShopManagerPro.Models
 
         public string Nev { get; set; }
 
-        public string Leiras { get; set; }
-
         public decimal Ar { get; set; }
 
         public int Mennyiseg { get; set; }
 
-        public string Kategoria { get; set; }
-
         public string Marka { get; set; }
 
-        public double Suly { get; set; }
+        public double Suly { get; set; } = 0;
 
-        public bool ElerhetoE { get; set; }
 
-        public DateTime Keszitve { get; set; }
+
         public Termek()
         {
-            Keszitve = DateTime.Now;
-            ElerhetoE = true;
+
         }
 
         public override string ToString()

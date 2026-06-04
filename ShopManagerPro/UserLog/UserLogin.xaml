@@ -61,7 +61,7 @@
             Height="35"
             Margin="0,20,0,0"
             Background="White"
-            
+            Click="LoginBtn_Click"
             Content="Belépés"
             FontSize="20"
             Foreground="Black" />
