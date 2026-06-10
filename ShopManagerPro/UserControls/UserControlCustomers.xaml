@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="ShopManagerPro.UserControls.UserControlCustomers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+
+            <TextBlock Foreground="White"
+                Text="Telefonszám"/>
+            <TextBox x:Name="phoneTxtBx"/>
+
+            <TextBlock Foreground="White"
+                Text="Cím"/>
+            <TextBox x:Name="addressTxtBx"/>
+
+            <TextBlock Foreground="White"
+                Text="Város"/>
+            <TextBox x:Name="cityTxtBx"/>
+
+            <TextBlock Foreground="White"
+                Text="Ország"/>
+            <TextBox x:Name="countryTxtBx"/>
+
+            <TextBlock Foreground="White"
+                Text="Hűségpont"/>
+            <TextBox x:Name="loyaltyTxtBx"/>
+
+            <WrapPanel Margin="0,10">
+
+                <Button x:Name="mentesBtn"
+                        Width="120"
+                        Content="Mentés"
+                        Click="mentesBtn_Click"/>
+
+                <Button x:Name="modBtn"
+                        Width="120"
+                        Content="Módosítás"
+                        Click="modBtn_Click"/>
+
+                <Button x:Name="torlesBtn"
+                        Width="120"
+                        Content="Törlés"
+                        Click="torlesBtn_Click"/>
+
+            </WrapPanel>
+
+        </StackPanel>
+
+        <DataGrid x:Name="datagridCustomers"
+                  Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  SelectionChanged="datagridCustomers_SelectionChanged">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Id"
+                                    Binding="{Binding Id}"/>
+
+                <DataGridTextColumn Header="Telefonszám"
+                                    Binding="{Binding PhoneNumber}"/>
+
+                <DataGridTextColumn Header="Cím"
+                                    Binding="{Binding Address}"/>
+
+                <DataGridTextColumn Header="Város"
+                                    Binding="{Binding City}"/>
+
+                <DataGridTextColumn Header="Ország"
+                                    Binding="{Binding Country}"/>
+
+                <DataGridTextColumn Header="Pontok"
+                                    Binding="{Binding LoyaltyPoints}"/>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+
+</UserControl>

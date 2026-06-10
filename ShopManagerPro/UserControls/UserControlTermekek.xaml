@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="ShopManagerPro.UserControls.UserControlTermekek"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+
+            <TextBlock Text="Név"/>
+            <TextBox x:Name="nevTxtBx"/>
+
+            <TextBlock Text="Ár"/>
+            <TextBox x:Name="arTxtBx"/>
+
+            <TextBlock Text="Mennyiség"/>
+            <TextBox x:Name="mennyisegTxtBx"/>
+
+            <TextBlock Text="Márka"/>
+            <TextBox x:Name="markaTxtBx"/>
+
+            <TextBlock Text="Súly"/>
+            <TextBox x:Name="sulyTxtBx"/>
+
+            <WrapPanel Margin="0,10,0,10">
+
+                <Button x:Name="mentesBtn"
+                        Width="120"
+                        Margin="5"
+                        Content="Mentés"
+                        Click="mentesBtn_Click"/>
+
+                <Button x:Name="modBtn"
+                        Width="120"
+                        Margin="5"
+                        Content="Módosítás"
+                        Click="modBtn_Click"/>
+
+                <Button x:Name="torlesBtn"
+                        Width="120"
+                        Margin="5"
+                        Content="Törlés"
+                        Click="torlesBtn_Click"/>
+
+            </WrapPanel>
+
+        </StackPanel>
+
+        <DataGrid x:Name="datagridTermekek"
+                  Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  SelectionChanged="datagridTermekek_SelectionChanged">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Id"
+                                    Binding="{Binding Id}"/>
+
+                <DataGridTextColumn Header="Név"
+                                    Binding="{Binding Nev}"/>
+
+                <DataGridTextColumn Header="Ár"
+                                    Binding="{Binding Ar}"/>
+
+                <DataGridTextColumn Header="Mennyiség"
+                                    Binding="{Binding Mennyiseg}"/>
+
+                <DataGridTextColumn Header="Márka"
+                                    Binding="{Binding Marka}"/>
+
+                <DataGridTextColumn Header="Súly"
+                                    Binding="{Binding Suly}"/>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,72 @@
+﻿<Window x:Class="ShopManagerPro.Views.UserLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="UserLogin"
+        Height="450"
+        Width="300"
+        Background="Black">
+
+    <StackPanel Margin="20">
+
+        <TextBlock
+            Text="ShopManagerPro bejelentkezés"
+            Foreground="White"
+            FontSize="16"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"/>
+
+        <Grid Margin="0,20,0,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Text="Felhasználónév:"
+                Foreground="White"
+                Margin="0,0,0,5"/>
+
+            <TextBox
+                x:Name="loginUserText"
+                Grid.Row="1"
+                Height="35"
+                Margin="0,0,0,15"/>
+
+            <TextBlock
+                Grid.Row="2"
+                Text="Jelszó:"
+                Foreground="White"
+                Margin="0,0,0,5"/>
+
+            <PasswordBox
+                x:Name="loginPasswordText"
+                Grid.Row="3"
+                Height="35"/>
+        </Grid>
+
+        <TextBlock
+            Text="Elfelejtett jelszó"
+            Foreground="DarkRed"
+            FontStyle="Italic"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0"/>
+
+        <Button
+            x:Name="LoginBtn"
+            Width="250"
+            Height="35"
+            Margin="0,20,0,0"
+            Background="White"
+            Content="Belépés"
+            FontSize="20"
+            Foreground="Black"
+            Click="LoginBtn_Click"/>
+    </StackPanel>
+</Window>

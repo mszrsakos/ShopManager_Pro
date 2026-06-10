@@ -1,32 +1,23 @@
 ﻿using ShopManagerPro.Models;
 using ShopManagerPro.Services;
-using ShopManagerPro;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace ShopManagerPro.UserControls
 {
-    /// <summary>
-    /// Interaction logic for UserControlFelhasznalok.xaml
-    /// </summary>
     public partial class UserControlFelhasznalok : UserControl
     {
-        List<Felhasznalo> felhasznalok;
-        Felhasznalo valasztottFelhasznalo;
+        private Felhasznalo valasztottFelhasznalo;
 
         public UserControlFelhasznalok()
         {
             InitializeComponent();
 
-
+            szerepkor.ItemsSource =
+                Enum.GetNames(typeof(Szerepkorok));
 
             ReadDatabase();
-
-            mentesBtn.Visibility = Visibility.Visible;
-            modBth.Visibility = Visibility.Hidden;
-            torlesBtn.Visibility = Visibility.Hidden;
-
-            szerepkor.ItemsSource = Enum.GetNames(typeof(Szerepkorok));
         }
 
         private void ReadDatabase()
@@ -35,8 +26,8 @@ namespace ShopManagerPro.UserControls
                 Enum.GetName(typeof(Szerepkorok),
                 Szerepkorok.Vendég);
 
-            teljesNevTxtBx.Clear();
             felhasznaloNevTxtBx.Clear();
+            teljesNevTxtBx.Clear();
             jelszoBx.Clear();
 
             var repository =
@@ -53,72 +44,112 @@ namespace ShopManagerPro.UserControls
             torlesBtn.Visibility = Visibility.Hidden;
         }
 
-        private void datagridFelhasznalok_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void datagridFelhasznalok_SelectionChanged(
+            object sender,
+            SelectionChangedEventArgs e)
         {
+            if (datagridFelhasznalok.SelectedItem == null)
+                return;
+
+            valasztottFelhasznalo =
+                (Felhasznalo)datagridFelhasznalok.SelectedItem;
+
+            felhasznaloNevTxtBx.Text =
+                valasztottFelhasznalo.FhNev;
+
+            teljesNevTxtBx.Text =
+                valasztottFelhasznalo.TeljesNev;
+
+            szerepkor.Text =
+                valasztottFelhasznalo.SzerepkorNev;
+
+            mentesBtn.Visibility = Visibility.Hidden;
             modBth.Visibility = Visibility.Visible;
             torlesBtn.Visibility = Visibility.Visible;
-            mentesBtn.Visibility = Visibility.Hidden;
+        }
 
-            if (datagridFelhasznalok.SelectedItem != null)
+        private void mentesBtn_Click(
+            object sender,
+            RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(felhasznaloNevTxtBx.Text))
+                return;
+
+            string szerepkorNev =
+                (string)szerepkor.SelectedItem;
+
+            Szerepkorok szerepkorEnum =
+                (Szerepkorok)Enum.Parse(
+                    typeof(Szerepkorok),
+                    szerepkorNev);
+
+            Felhasznalo ujFelhasznalo =
+                new Felhasznalo(
+                    felhasznaloNevTxtBx.Text,
+                    teljesNevTxtBx.Text,
+                    PasswordHelper.HashPassword(jelszoBx.Password),
+                    (int)szerepkorEnum);
+
+            var repository =
+                new GenericRepository<Felhasznalo>(App.databasePath);
+
+            repository.insert(ujFelhasznalo);
+
+            ReadDatabase();
+        }
+
+        private void modBth_Click(
+            object sender,
+            RoutedEventArgs e)
+        {
+            if (valasztottFelhasznalo == null)
+                return;
+
+            valasztottFelhasznalo.FhNev =
+                felhasznaloNevTxtBx.Text;
+
+            valasztottFelhasznalo.TeljesNev =
+                teljesNevTxtBx.Text;
+
+            string szerepkorNev =
+                (string)szerepkor.SelectedItem;
+
+            Szerepkorok szerepkorEnum =
+                (Szerepkorok)Enum.Parse(
+                    typeof(Szerepkorok),
+                    szerepkorNev);
+
+            valasztottFelhasznalo.Szerepkor =
+                (int)szerepkorEnum;
+
+            if (!string.IsNullOrWhiteSpace(jelszoBx.Password))
             {
-                valasztottFelhasznalo = (Felhasznalo)datagridFelhasznalok.SelectedItem;
-                felhasznaloNevTxtBx.Text = valasztottFelhasznalo.FhNev;
-                szerepkor.Text = valasztottFelhasznalo.SzerepkorNev;
-            }
-        }
-
-        private void torlesBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-            var FelhasznaloRepository = new GenericRepository<Felhasznalo>(App.databasePath);
-            FelhasznaloRepository.delete(valasztottFelhasznalo);
-            ReadDatabase();
-
-        }
-
-        private void modBth_Click(object sender, RoutedEventArgs e)
-        {
-            valasztottFelhasznalo.FhNev = felhasznaloNevTxtBx.Text;
-            valasztottFelhasznalo.TeljesNev = teljesNevTxtBx.Text;
-            string kivalasztottSzerepkorNev = (string)szerepkor.SelectedItem;
-            Szerepkorok kivalasztottSzerepkor = (Szerepkorok)Enum.Parse(typeof(Szerepkorok), kivalasztottSzerepkorNev);
-            int kivalasztottSzerepkorId = (int)kivalasztottSzerepkor;
-            valasztottFelhasznalo.Szerepkor = kivalasztottSzerepkorId;
-
-            //TODO: jelszó - SHA!!!!! - jelszót csak akkor módosítunk ha megadja az inputban. 
-            if (jelszoBx.Password != "")
-            {
-                valasztottFelhasznalo.Jelszo = PasswordHelper.HashPassword(jelszoBx.Password);
+                valasztottFelhasznalo.Jelszo =
+                    PasswordHelper.HashPassword(
+                        jelszoBx.Password);
             }
 
-            // Repo update:
-            var FelhasznaloRepository = new GenericRepository<Felhasznalo>(App.databasePath);
-            FelhasznaloRepository.update(valasztottFelhasznalo);
+            var repository =
+                new GenericRepository<Felhasznalo>(App.databasePath);
 
-            //Datagrid update:
+            repository.update(valasztottFelhasznalo);
+
             ReadDatabase();
-
-
         }
 
-        private void mentesBtn_Click(object sender, RoutedEventArgs e)
+        private void torlesBtn_Click(
+            object sender,
+            RoutedEventArgs e)
         {
-            //Szerepkör névből szerepkörID
-            string kivalasztottSzerepkorNev = (string)szerepkor.SelectedItem;
-            Szerepkorok kivalasztottSzerepkor = (Szerepkorok)Enum.Parse(typeof(Szerepkorok), kivalasztottSzerepkorNev);
-            int kivalasztottSzerepkorId = (int)kivalasztottSzerepkor;
+            if (valasztottFelhasznalo == null)
+                return;
 
-            // Uj felhasználó objektum létrehozás
-            Felhasznalo ujFelhasznalo = new Felhasznalo(felhasznaloNevTxtBx.Text,
-                teljesNevTxtBx.Text, PasswordHelper.HashPassword(jelszoBx.Password), kivalasztottSzerepkorId);
+            var repository =
+                new GenericRepository<Felhasznalo>(App.databasePath);
 
-            // Uj user repo, insert to db
-            var FelhasznaloRepository = new GenericRepository<Felhasznalo>(App.databasePath);
-            FelhasznaloRepository.insert(ujFelhasznalo);
+            repository.delete(valasztottFelhasznalo);
 
-            //Datagrid update:
             ReadDatabase();
-
         }
     }
 }
